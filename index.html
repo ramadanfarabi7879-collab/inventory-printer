@@ -1386,9 +1386,9 @@
             // استغلال مساحة الصفحة المتناسقة بعرض مثالي وبدون أي قص على الحافتين
             const pageWidthPx = 1040;
             const PDF_COLS = [
-                { label: cols[0].label, width: '38px', align: 'center' },
-                { label: cols[1].label, width: '75px', align: textAlignMain },
-                { label: cols[2].label, width: '350px', align: textAlignMain },
+                { label: cols[0].label, width: '36px', align: 'center' },
+                { label: cols[1].label, width: '80px', align: textAlignMain },
+                { label: cols[2].label, width: '346px', align: textAlignMain },
                 { label: cols[3].label, width: '70px', align: textAlignMain },
                 { label: cols[4].label, width: '75px', align: textAlignMain },
                 { label: cols[5].label, width: '70px', align: 'center' },
@@ -1402,7 +1402,7 @@
             function generateHeaderRowHtml() {
                 let ths = '';
                 PDF_COLS.forEach(c => {
-                    ths += `<th style="width: ${c.width}; max-width: ${c.width}; text-align: ${c.align}; border: 1px solid #333; padding: 4px 2px; background-color: #e2e8f0; color: #000; font-weight: bold; font-size: 7.5pt; line-height: 1.15; word-wrap: break-word; white-space: normal; vertical-align: middle;">${c.label}</th>`;
+                    ths += `<th style="width: ${c.width}; max-width: ${c.width}; text-align: ${c.align}; border: 1px solid #333; padding: 3px 2px; background-color: #e2e8f0; color: #000; font-weight: bold; font-size: 7.5pt; line-height: 1.15; word-wrap: break-word; white-space: normal; vertical-align: middle;">${c.label}</th>`;
                 });
                 return `<thead><tr style="background-color: #e2e8f0;">${ths}</tr></thead>`;
             }
@@ -1410,30 +1410,30 @@
             function generateDataRowHtml(row, i) {
                 return `
                     <tr style="page-break-inside: avoid;">
-                        <td style="width: ${PDF_COLS[0].width}; text-align: center; color: #000; font-weight: 800; border: 1px solid #333; padding: 3px 2px; font-size: 8.5pt; background-color: #f8fafc;">${i + 1}</td>
-                        <td style="width: ${PDF_COLS[1].width}; font-family: monospace; font-weight: bold; text-align: ${textAlignMain}; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; color: #000; word-break: break-all;">[${row.code || '-'}]</td>
-                        <td style="width: ${PDF_COLS[2].width}; font-weight: 800; font-size: 8.5pt; color: #000; text-align: ${textAlignMain}; line-height: 1.25; border: 1px solid #333; padding: 3px 4px; word-break: break-word;">${row.name}</td>
-                        <td style="width: ${PDF_COLS[3].width}; text-align: ${textAlignMain}; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; word-break: break-all;">${row.location}</td>
-                        <td style="width: ${PDF_COLS[4].width}; font-family: monospace; text-align: ${textAlignMain}; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; word-break: break-all;">${row.lot}</td>
-                        <td style="width: ${PDF_COLS[5].width}; text-align: center; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; white-space: nowrap;">${row.expiry}</td>
-                        <td style="width: ${PDF_COLS[6].width}; text-align: center; font-weight: bold; border: 1px solid #333; padding: 3px 2px; font-size: 8pt;">${row.qtyScanned}</td>
-                        <td style="width: ${PDF_COLS[7].width}; text-align: center; border: 1px solid #333; padding: 3px 2px; font-size: 8pt;">${row.beforeAdj}</td>
-                        <td style="width: ${PDF_COLS[8].width}; text-align: center; font-weight: 800; font-size: 8.5pt; color: #15803d; background-color: #f0fdf4; border: 1px solid #333; padding: 3px 2px;">${row.afterAdj}</td>
-                        <td style="width: ${PDF_COLS[9].width}; text-align: right; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; white-space: nowrap;">${row.diffCost.toFixed(2)}</td>
-                        <td style="width: ${PDF_COLS[10].width}; text-align: right; border: 1px solid #333; padding: 3px 2px; font-size: 7.5pt; white-space: nowrap;">${row.diffSales.toFixed(2)}</td>
+                        <td style="width: ${PDF_COLS[0].width}; text-align: center; color: #000; font-weight: 800; border: 1px solid #333; padding: 2px 1px; font-size: 8pt; background-color: #f8fafc;">${i + 1}</td>
+                        <td style="width: ${PDF_COLS[1].width}; font-family: monospace; font-weight: bold; text-align: ${textAlignMain}; border: 1px solid #333; padding: 2px 2px; font-size: 7pt; color: #000; white-space: nowrap;">[${row.code || '-'}]</td>
+                        <td style="width: ${PDF_COLS[2].width}; font-weight: 800; font-size: 8.5pt; color: #000; text-align: ${textAlignMain}; line-height: 1.2; border: 1px solid #333; padding: 2px 3px; word-break: break-word;">${row.name}</td>
+                        <td style="width: ${PDF_COLS[3].width}; text-align: ${textAlignMain}; border: 1px solid #333; padding: 2px 2px; font-size: 7.5pt; word-break: break-all;">${row.location}</td>
+                        <td style="width: ${PDF_COLS[4].width}; font-family: monospace; text-align: ${textAlignMain}; border: 1px solid #333; padding: 2px 2px; font-size: 7.5pt; word-break: break-all;">${row.lot}</td>
+                        <td style="width: ${PDF_COLS[5].width}; text-align: center; border: 1px solid #333; padding: 2px 2px; font-size: 7.5pt; white-space: nowrap;">${row.expiry}</td>
+                        <td style="width: ${PDF_COLS[6].width}; text-align: center; font-weight: bold; border: 1px solid #333; padding: 2px 2px; font-size: 8pt;">${row.qtyScanned}</td>
+                        <td style="width: ${PDF_COLS[7].width}; text-align: center; border: 1px solid #333; padding: 2px 2px; font-size: 8pt;">${row.beforeAdj}</td>
+                        <td style="width: ${PDF_COLS[8].width}; text-align: center; font-weight: 800; font-size: 8.5pt; color: #15803d; background-color: #f0fdf4; border: 1px solid #333; padding: 2px 2px;">${row.afterAdj}</td>
+                        <td style="width: ${PDF_COLS[9].width}; text-align: right; border: 1px solid #333; padding: 2px 2px; font-size: 7.5pt; white-space: nowrap;">${row.diffCost.toFixed(2)}</td>
+                        <td style="width: ${PDF_COLS[10].width}; text-align: right; border: 1px solid #333; padding: 2px 2px; font-size: 7.5pt; white-space: nowrap;">${row.diffSales.toFixed(2)}</td>
                     </tr>
                 `;
             }
 
-            // توزيع الصفوف بدقة: 22 صفاً بالصفحة الأولى ثم 24 صفاً بالصفحات التالية
+            // توزيع الصفوف بدقة متناهية: 22 صفاً بالصفحة الأولى ثم 23 صفاً بالصفحات التالية
             const pageChunks = [];
             const page1Rows = processedRows.slice(0, 22);
             pageChunks.push(page1Rows);
 
             let rowCursor = 22;
             while (rowCursor < processedRows.length) {
-                pageChunks.push(processedRows.slice(rowCursor, rowCursor + 24));
-                rowCursor += 24;
+                pageChunks.push(processedRows.slice(rowCursor, rowCursor + 23));
+                rowCursor += 23;
             }
 
             const totalPdfPages = pageChunks.length;

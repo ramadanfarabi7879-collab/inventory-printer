@@ -1425,12 +1425,9 @@
                 `;
             }
 
-            // توزيع الصفوف بدقة متناهية: 22 صفاً بالصفحة الأولى ثم 23 صفاً بالصفحات التالية
+            // توزيع الصفوف بدقة متساوية: 23 صفاً لكل صفحة ليكون الإجمالي 3 صفحات متناسقة وممتلئة (23 × 3 = 69)
             const pageChunks = [];
-            const page1Rows = processedRows.slice(0, 22);
-            pageChunks.push(page1Rows);
-
-            let rowCursor = 22;
+            let rowCursor = 0;
             while (rowCursor < processedRows.length) {
                 pageChunks.push(processedRows.slice(rowCursor, rowCursor + 23));
                 rowCursor += 23;

@@ -77,9 +77,11 @@
         }
 
         .container {
-            max-width: 1400px;
-            margin: 24px auto;
-            padding: 0 20px;
+            width: 96%;
+            max-width: 1650px;
+            margin: 16px auto;
+            padding: 0 12px;
+            box-sizing: border-box;
         }
 
         /* شبكة وضع رفع الملف والإعدادات بجانب بعضهما */
@@ -444,6 +446,7 @@
 
         #dataTable {
             width: 100%;
+            min-width: 1080px;
             border-collapse: collapse;
             font-size: 8.5pt;
             background: #ffffff;
@@ -466,8 +469,8 @@
         /* تنسيقات الطباعة الصارمة والواضحة */
         @media print {
             @page {
-                size: A4 landscape;
-                margin: 6mm;
+                size: auto;
+                margin: 0 !important;
             }
 
             html, body {
@@ -528,12 +531,12 @@
 
             table {
                 width: 100% !important;
-                font-size: 8pt !important;
+                font-size: 8.5pt !important;
                 border-collapse: collapse !important;
             }
 
             th, td {
-                padding: 4px 6px !important;
+                padding: 6px 4px !important;
                 border: 1px solid #000 !important;
                 color: #000 !important;
             }
@@ -696,8 +699,8 @@
                     </div>
                 </div>
 
-                <!-- شبكة بحث واختيار الاستور التفاعلية -->
-                <div style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 14px; align-items: flex-end;">
+                <!-- شبكة بحث واختيار الاستور التفاعلية الموحدة لجميع الشاشات -->
+                <div class="store-control-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; align-items: flex-end;">
                     <!-- 1. خانة البحث السريع في مسميات وأرقام الاستور -->
                     <div class="form-group">
                         <label class="form-label" for="storeSearchInput">
@@ -781,33 +784,33 @@
         const btnExportExcel = document.getElementById('btnExportExcel');
         const btnLoadDemo = document.getElementById('btnLoadDemo');
 
-        // إعدادات لغات مسميات الأعمدة مع إعطاء خانة اسم الصنف والـ After Adjustment مساحة واسعة وبارزة
+        // إعدادات لغات مسميات الأعمدة - استغلال أقصى مساحة لاسم الصنف وإظهار خانة العدد/المسلسل بوضوح
         const COLUMNS_CONFIG = {
             EN: [
-                { label: '#', width: '30px', align: 'center' },
-                { label: 'Code', width: '75px', align: 'left' },
-                { label: 'Product', width: '35%', align: 'left' },
+                { label: '# / No.', width: '40px', align: 'center' },
+                { label: 'Code', width: '85px', align: 'left' },
+                { label: 'Product Name', width: 'auto', align: 'left' },
                 { label: 'Location', width: '75px', align: 'left' },
-                { label: 'Lot/Serial Number', width: '95px', align: 'left' },
-                { label: 'Expiry Date', width: '80px', align: 'center' },
-                { label: 'Quantity Scanned', width: '65px', align: 'center' },
-                { label: 'Before Adjustment', width: '70px', align: 'center' },
-                { label: 'After Adjustment', width: '90px', align: 'center' },
-                { label: 'Difference Cost', width: '70px', align: 'right' },
-                { label: 'Difference Sales Price', width: '70px', align: 'right' }
+                { label: 'Lot/Serial', width: '85px', align: 'left' },
+                { label: 'Expiry Date', width: '75px', align: 'center' },
+                { label: 'Scanned', width: '60px', align: 'center' },
+                { label: 'Before Adj', width: '60px', align: 'center' },
+                { label: 'After Adj', width: '75px', align: 'center' },
+                { label: 'Diff Cost', width: '60px', align: 'right' },
+                { label: 'Diff Sales', width: '60px', align: 'right' }
             ],
             AR: [
-                { label: '#', width: '30px', align: 'center' },
-                { label: 'كود الصنف (Code)', width: '75px', align: 'right' },
-                { label: 'اسم الصنف (Product)', width: '35%', align: 'right' },
+                { label: 'م / العدد', width: '45px', align: 'center' },
+                { label: 'كود الصنف (Code)', width: '85px', align: 'right' },
+                { label: 'اسم الصنف (Product)', width: 'auto', align: 'right' },
                 { label: 'الموقع (Location)', width: '75px', align: 'right' },
-                { label: 'رقم التشغيلة (Lot/Serial)', width: '95px', align: 'right' },
-                { label: 'تاريخ الصلاحية (Expiry)', width: '80px', align: 'center' },
-                { label: 'الممسوح (Scanned)', width: '65px', align: 'center' },
-                { label: 'قبل الجرد (Before)', width: '70px', align: 'center' },
-                { label: 'بعد الجرد (After)', width: '90px', align: 'center' },
-                { label: 'فرق التكلفة (Diff Cost)', width: '70px', align: 'right' },
-                { label: 'فرق البيع (Diff Sales)', width: '70px', align: 'right' }
+                { label: 'رقم التشغيلة (Lot)', width: '85px', align: 'right' },
+                { label: 'الصلاحية (Expiry)', width: '75px', align: 'center' },
+                { label: 'الممسوح (Scanned)', width: '60px', align: 'center' },
+                { label: 'قبل الجرد (Before)', width: '60px', align: 'center' },
+                { label: 'بعد الجرد (After)', width: '75px', align: 'center' },
+                { label: 'فرق التكلفة (Cost)', width: '60px', align: 'right' },
+                { label: 'فرق البيع (Sales)', width: '60px', align: 'right' }
             ]
         };
 
@@ -1080,8 +1083,8 @@
                 const name = (colName || '').toString().toLowerCase().trim();
                 if (name.includes('product') || name.includes('اسم الصنف') || name.includes('المنتج') || name.includes('الصنف')) {
                     colMap.product = colIdx;
-                } else if (name.includes('code') || name.includes('كود') || name.includes('رمز')) {
-                    colMap.code = colIdx;
+                } else if (name.includes('code') || name.includes('كود') || name.includes('رمز') || name.includes('barcode') || name.includes('باركود') || name.includes('reference') || name.includes('ref') || name.includes('رقم الصنف')) {
+                    if (colMap.code === -1) colMap.code = colIdx;
                 } else if (name.includes('location') || name.includes('موقع') || name.includes('مخزن')) {
                     colMap.location = colIdx;
                 } else if (name.includes('lot') || name.includes('serial') || name.includes('تشغيلة') || name.includes('باتش')) {
@@ -1217,10 +1220,10 @@
                 const salesClass = row.diffSales > 0 ? 'badge-diff-pos' : (row.diffSales < 0 ? 'badge-diff-neg' : 'badge-diff-zero');
 
                 tr.innerHTML = `
-                    <td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">${index + 1}</td>
-                    <td style="text-align: ${alignText};"><span class="badge-code">[${row.code || 'N/A'}]</span></td>
-                    <td style="font-weight: 700; font-size: 0.95rem; color: #0f172a; text-align: ${alignText}; min-width: 280px; line-height: 1.4;">${row.name}</td>
-                    <td style="color: #64748b; text-align: ${alignText};">${row.location}</td>
+                    <td style="text-align: center; color: #0f172a; font-weight: 800; font-size: 0.95rem; background-color: #f8fafc; border: 1px solid #cbd5e1;">${index + 1}</td>
+                    <td style="text-align: ${alignText};"><span class="badge-code" style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">[${row.code || '-'}]</span></td>
+                    <td style="font-weight: 800; font-size: 1.05rem; color: #000000; text-align: ${alignText}; min-width: 320px; line-height: 1.45;">${row.name}</td>
+                    <td style="color: #475569; text-align: ${alignText};">${row.location}</td>
                     <td style="font-family: monospace; text-align: ${alignText};">${row.lot}</td>
                     <td style="text-align: center;">${row.expiry}</td>
                     <td style="text-align: center; font-weight: 700; color: #2563eb;">${row.qtyScanned}</td>
@@ -1253,173 +1256,32 @@
             renderTable(filtered);
         });
 
-        // نافذة طباعة مخصصة ومثالية لإنشاء PDF وطباعة بدون أي صفحات بيضاء نهائياً
+        // طباعة فورية ومباشرة للتقرير والجدول
         function openCleanPrintWindow() {
             if (processedRows.length === 0) {
                 alert('يرجى رفع ملف إكسيل أولاً أو الضغط على تجربة البيانات النموذجية.');
                 return;
             }
 
-            const printWin = window.open('', '_blank');
-            if (!printWin) {
-                window.print();
-                return;
-            }
-
-            const cleanTitle = currentHeaderTitle;
             const printDate = new Date().toLocaleDateString('en-GB') + ' ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-            const lang = getSelectedLang();
-            const cols = COLUMNS_CONFIG[lang];
+            const dateEl = document.getElementById('reportDate');
+            if (dateEl) dateEl.textContent = printDate;
 
-            const subtitleText = lang === 'EN' ? 'INVENTORY AUDIT & ADJUSTMENT REPORT' : 'تقرير جرد ومطابقة المخزون';
-            const pageDir = lang === 'EN' ? 'ltr' : 'rtl';
-            const textAlignMain = lang === 'EN' ? 'left' : 'right';
+            const titleEl = document.getElementById('reportHeaderTitle');
+            if (titleEl) titleEl.textContent = currentHeaderTitle;
 
-            let thsHtml = '';
-            cols.forEach(c => {
-                thsHtml += `<th style="${c.width ? 'width:' + c.width + ';' : ''} text-align:${c.align};">${c.label}</th>`;
-            });
+            const badgeEl = document.getElementById('reportCountBadge');
+            if (badgeEl) badgeEl.textContent = processedRows.length;
 
-            let rowsHtml = '';
-            processedRows.forEach((row, i) => {
-                rowsHtml += `
-                    <tr>
-                        <td style="text-align: center; color: #666;">${i + 1}</td>
-                        <td style="font-family: monospace; font-weight: bold; text-align: ${textAlignMain};">[${row.code || ''}]</td>
-                        <td style="font-weight: 700; font-size: 9.5pt; text-align: ${textAlignMain}; line-height: 1.35;">${row.name}</td>
-                        <td style="text-align: ${textAlignMain};">${row.location}</td>
-                        <td style="font-family: monospace; text-align: ${textAlignMain};">${row.lot}</td>
-                        <td style="text-align: center;">${row.expiry}</td>
-                        <td style="text-align: center; font-weight: bold;">${row.qtyScanned}</td>
-                        <td style="text-align: center;">${row.beforeAdj}</td>
-                        <td style="text-align: center; font-weight: 800; font-size: 9.5pt; color: #000; background-color: #f1f5f9; -webkit-print-color-adjust: exact; print-color-adjust: exact;">${row.afterAdj}</td>
-                        <td style="text-align: right;">${row.diffCost.toFixed(2)}</td>
-                        <td style="text-align: right;">${row.diffSales.toFixed(2)}</td>
-                    </tr>
-                `;
-            });
-
-            const html = `<!DOCTYPE html>
-<html lang="${lang === 'EN' ? 'en' : 'ar'}" dir="${pageDir}">
-<head>
-    <meta charset="UTF-8">
-    <title>${cleanTitle}</title>
-    <style>
-        @page {
-            size: A4 landscape;
-            margin: 3mm;
-        }
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            color: #000;
-            background: #fff;
-        }
-        /* ترويسة الصفحة في المنتصف تماماً */
-        .header {
-            text-align: center;
-            border: 2px solid #000;
-            padding: 10px 16px;
-            margin-bottom: 12px;
-            background-color: #f1f5f9;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        .header-title {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin: 0 auto;
-        }
-        .header-subtitle {
-            font-size: 12px;
-            color: #333;
-            margin-top: 3px;
-            font-weight: 600;
-        }
-        .header-meta {
-            margin-top: 6px;
-            font-size: 11px;
-            color: #555;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            direction: ltr;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 8.5pt;
-        }
-        th, td {
-            border: 1px solid #333;
-            padding: 4px 6px;
-        }
-        thead {
-            display: table-header-group;
-            background-color: #e2e8f0;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        th {
-            font-weight: bold;
-            color: #000;
-        }
-        tr {
-            page-break-inside: avoid;
-        }
-        @media print {
-            body { margin: 0; }
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <div class="header-title">${cleanTitle}</div>
-        <div class="header-subtitle">${subtitleText}</div>
-        <div class="header-meta">
-            <span><strong>Date:</strong> ${printDate}</span>
-            <span><strong>Total Items:</strong> ${processedRows.length}</span>
-        </div>
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                ${thsHtml}
-            </tr>
-        </thead>
-        <tbody>
-            ${rowsHtml}
-        </tbody>
-    </table>
-
-    <script>
-        window.onload = function() {
-            setTimeout(function() {
-                window.print();
-            }, 300);
-        };
-    <\/script>
-</body>
-</html>`;
-
-            printWin.document.open();
-            printWin.document.write(html);
-            printWin.document.close();
+            // فتح نافذة الطباعة فوراً
+            window.print();
         }
 
-        // الزر الرئيسي: طباعة فورية عبر نافذة الطباعة
         btnPrint.addEventListener('click', () => {
             openCleanPrintWindow();
         });
 
-        // دالة تنزيل وحفظ ملف PDF مباشرة بدون فتح نافذة الطباعة وبنفس الشكل والتنسيق النقي لتقرير الطباعة
+        // دالة تنزيل وحفظ ملف PDF مباشرة بدون أي هوامش فارغة
         function downloadDirectPdf() {
             if (processedRows.length === 0) {
                 alert('يرجى رفع ملف إكسيل أولاً أو الضغط على تجربة البيانات النموذجية.');
@@ -1460,30 +1322,31 @@
             `;
             loadingOverlay.innerHTML = `
                 <div style="border: 3px solid rgba(255,255,255,0.3); border-top-color: #38bdf8; border-radius: 50%; width: 22px; height: 22px; animation: spin 0.8s linear infinite;"></div>
-                <span>جارٍ إنشاء وحفظ ملف PDF مباشرة باسم [${fileName}]...</span>
+                <span>جارٍ إنشاء وحفظ ملف PDF مباشرة بدون هوامش باسم [${fileName}]...</span>
                 <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
             `;
             document.body.appendChild(loadingOverlay);
 
-            // استغلال كامل مساحة الصفحة أفقياً (1080px) ورأسياً بدون ترك أي هوامش فارغة على الجوانب أو في أسفل الورقة
+            // استغلال كامل مساحة الصفحة (1120px) بدون هوامش فارغة إطلاقاً
+            const pageWidthPx = 1120;
             const PDF_COLS = [
-                { label: cols[0].label, width: '35px', align: 'center' },
+                { label: cols[0].label, width: '40px', align: 'center' },
                 { label: cols[1].label, width: '85px', align: textAlignMain },
-                { label: cols[2].label, width: '360px', align: textAlignMain },
-                { label: cols[3].label, width: '80px', align: textAlignMain },
-                { label: cols[4].label, width: '95px', align: textAlignMain },
-                { label: cols[5].label, width: '85px', align: 'center' },
-                { label: cols[6].label, width: '65px', align: 'center' },
-                { label: cols[7].label, width: '65px', align: 'center' },
-                { label: cols[8].label, width: '80px', align: 'center' },
-                { label: cols[9].label, width: '65px', align: 'right' },
-                { label: cols[10].label, width: '65px', align: 'right' }
+                { label: cols[2].label, width: '545px', align: textAlignMain },
+                { label: cols[3].label, width: '75px', align: textAlignMain },
+                { label: cols[4].label, width: '85px', align: textAlignMain },
+                { label: cols[5].label, width: '75px', align: 'center' },
+                { label: cols[6].label, width: '60px', align: 'center' },
+                { label: cols[7].label, width: '60px', align: 'center' },
+                { label: cols[8].label, width: '75px', align: 'center' },
+                { label: cols[9].label, width: '60px', align: 'right' },
+                { label: cols[10].label, width: '60px', align: 'right' }
             ];
 
             function generateHeaderRowHtml() {
                 let ths = '';
                 PDF_COLS.forEach(c => {
-                    ths += `<th style="width: ${c.width}; max-width: ${c.width}; text-align: ${c.align}; border: 1px solid #333; padding: 5px 2px; background-color: #e2e8f0; color: #000; font-weight: bold; font-size: 7.5pt; line-height: 1.15; word-wrap: break-word; white-space: normal; vertical-align: middle;">${c.label}</th>`;
+                    ths += `<th style="width: ${c.width}; max-width: ${c.width}; text-align: ${c.align}; border: 1px solid #333; padding: 6px 3px; background-color: #e2e8f0; color: #000; font-weight: bold; font-size: 8pt; line-height: 1.15; word-wrap: break-word; white-space: normal; vertical-align: middle;">${c.label}</th>`;
                 });
                 return `<thead><tr style="background-color: #e2e8f0;">${ths}</tr></thead>`;
             }
@@ -1491,22 +1354,22 @@
             function generateDataRowHtml(row, i) {
                 return `
                     <tr style="page-break-inside: avoid;">
-                        <td style="width: 35px; text-align: center; color: #666; border: 1px solid #333; padding: 4px 2px; font-size: 8pt;">${i + 1}</td>
-                        <td style="width: 85px; font-family: monospace; font-weight: bold; text-align: ${textAlignMain}; border: 1px solid #333; padding: 4px 3px; font-size: 8pt; white-space: nowrap;">[${row.code || ''}]</td>
-                        <td style="width: 360px; font-weight: 700; font-size: 8.8pt; text-align: ${textAlignMain}; line-height: 1.25; border: 1px solid #333; padding: 4px 6px; word-break: break-word;">${row.name}</td>
-                        <td style="width: 80px; text-align: ${textAlignMain}; border: 1px solid #333; padding: 4px 3px; font-size: 8pt; white-space: nowrap;">${row.location}</td>
-                        <td style="width: 95px; font-family: monospace; text-align: ${textAlignMain}; border: 1px solid #333; padding: 4px 3px; font-size: 8pt; white-space: nowrap;">${row.lot}</td>
-                        <td style="width: 85px; text-align: center; border: 1px solid #333; padding: 4px 2px; font-size: 8pt; white-space: nowrap;">${row.expiry}</td>
-                        <td style="width: 65px; text-align: center; font-weight: bold; border: 1px solid #333; padding: 4px 2px; font-size: 8.5pt;">${row.qtyScanned}</td>
-                        <td style="width: 65px; text-align: center; border: 1px solid #333; padding: 4px 2px; font-size: 8.5pt;">${row.beforeAdj}</td>
-                        <td style="width: 80px; text-align: center; font-weight: 800; font-size: 9pt; color: #15803d; background-color: #f0fdf4; border: 1px solid #333; padding: 4px 2px;">${row.afterAdj}</td>
-                        <td style="width: 65px; text-align: right; border: 1px solid #333; padding: 4px 3px; font-size: 8pt; white-space: nowrap;">${row.diffCost.toFixed(2)}</td>
-                        <td style="width: 65px; text-align: right; border: 1px solid #333; padding: 4px 3px; font-size: 8pt; white-space: nowrap;">${row.diffSales.toFixed(2)}</td>
+                        <td style="width: ${PDF_COLS[0].width}; text-align: center; color: #000; font-weight: 800; border: 1px solid #333; padding: 5px 2px; font-size: 9.5pt; background-color: #f8fafc;">${i + 1}</td>
+                        <td style="width: ${PDF_COLS[1].width}; font-family: monospace; font-weight: bold; text-align: ${textAlignMain}; border: 1px solid #333; padding: 5px 3px; font-size: 8pt; color: #000; white-space: nowrap;">[${row.code || '-'}]</td>
+                        <td style="width: ${PDF_COLS[2].width}; font-weight: 800; font-size: 11pt; color: #000; text-align: ${textAlignMain}; line-height: 1.3; border: 1px solid #333; padding: 5px 6px; word-break: break-word;">${row.name}</td>
+                        <td style="width: ${PDF_COLS[3].width}; text-align: ${textAlignMain}; border: 1px solid #333; padding: 5px 3px; font-size: 8pt; white-space: nowrap;">${row.location}</td>
+                        <td style="width: ${PDF_COLS[4].width}; font-family: monospace; text-align: ${textAlignMain}; border: 1px solid #333; padding: 5px 3px; font-size: 8pt; white-space: nowrap;">${row.lot}</td>
+                        <td style="width: ${PDF_COLS[5].width}; text-align: center; border: 1px solid #333; padding: 5px 2px; font-size: 8pt; white-space: nowrap;">${row.expiry}</td>
+                        <td style="width: ${PDF_COLS[6].width}; text-align: center; font-weight: bold; border: 1px solid #333; padding: 5px 2px; font-size: 9pt;">${row.qtyScanned}</td>
+                        <td style="width: ${PDF_COLS[7].width}; text-align: center; border: 1px solid #333; padding: 5px 2px; font-size: 9pt;">${row.beforeAdj}</td>
+                        <td style="width: ${PDF_COLS[8].width}; text-align: center; font-weight: 800; font-size: 9.5pt; color: #15803d; background-color: #f0fdf4; border: 1px solid #333; padding: 5px 2px;">${row.afterAdj}</td>
+                        <td style="width: ${PDF_COLS[9].width}; text-align: right; border: 1px solid #333; padding: 5px 3px; font-size: 8pt; white-space: nowrap;">${row.diffCost.toFixed(2)}</td>
+                        <td style="width: ${PDF_COLS[10].width}; text-align: right; border: 1px solid #333; padding: 5px 3px; font-size: 8pt; white-space: nowrap;">${row.diffSales.toFixed(2)}</td>
                     </tr>
                 `;
             }
 
-            // توزيع الصفوف بانضباط كامل لمنع أي فيض (Overflow) وضمان 3 صفحات ممتلئة بالكامل لـ 69 صنف
+            // توزيع الصفوف: 21 صفاً بالصفحة الأولى ثم 24 صفاً لملء الصفحة طولياً بدقة
             const pageChunks = [];
             const page1Rows = processedRows.slice(0, 21);
             pageChunks.push(page1Rows);
@@ -1531,10 +1394,10 @@
                 let pageTopHeader = '';
                 if (isFirst) {
                     pageTopHeader = `
-                        <div style="text-align: center; border: 2px solid #000; padding: 6px 12px; margin-bottom: 8px; background-color: #f1f5f9; width: 1080px; box-sizing: border-box;">
+                        <div style="text-align: center; border: 2px solid #000; padding: 6px 12px; margin-bottom: 6px; background-color: #f1f5f9; width: 100%; box-sizing: border-box;">
                             <div style="font-size: 22px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 auto;">${cleanTitle}</div>
                             <div style="font-size: 11px; color: #333; margin-top: 2px; font-weight: 600;">${subtitleText}</div>
-                            <div style="margin-top: 4px; font-size: 10px; color: #555; display: flex; justify-content: center; gap: 40px; direction: ltr;">
+                            <div style="margin-top: 4px; font-size: 10px; color: #555; display: flex; justify-content: center; gap: 30px; direction: ltr;">
                                 <span><strong>Date:</strong> ${printDate}</span>
                                 <span><strong>Total Items:</strong> ${processedRows.length}</span>
                                 <span><strong>Page:</strong> ${pageNum} of ${totalPdfPages}</span>
@@ -1543,9 +1406,9 @@
                     `;
                 } else {
                     pageTopHeader = `
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 8px; width: 1080px; box-sizing: border-box; font-size: 10pt;">
-                            <div><strong style="font-size: 12pt; text-transform: uppercase;">${cleanTitle}</strong> &mdash; <span style="color: #475569; font-size: 9pt;">${subtitleText}</span></div>
-                            <div style="font-size: 9pt; color: #475569;"><strong>Date:</strong> ${printDate} &nbsp;|&nbsp; <strong>Page ${pageNum} of ${totalPdfPages}</strong></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 6px; width: 100%; box-sizing: border-box; font-size: 9.5pt;">
+                            <div><strong style="font-size: 11pt; text-transform: uppercase;">${cleanTitle}</strong> &mdash; <span style="color: #475569; font-size: 8.5pt;">${subtitleText}</span></div>
+                            <div style="font-size: 8.5pt; color: #475569;"><strong>Date:</strong> ${printDate} &nbsp;|&nbsp; <strong>Page ${pageNum} of ${totalPdfPages}</strong></div>
                         </div>
                     `;
                 }
@@ -1559,9 +1422,9 @@
                 const pageBreakCss = isLast ? 'page-break-after: avoid;' : 'page-break-after: always;';
 
                 pagesHtml += `
-                    <div class="pdf-page-container" style="width: 1080px; box-sizing: border-box; padding: 2px 0; margin: 0 auto; ${pageBreakCss}">
+                    <div class="pdf-page-container" style="width: ${pageWidthPx}px; box-sizing: border-box; padding: 4px 6px; margin: 0 auto; ${pageBreakCss}">
                         ${pageTopHeader}
-                        <table style="width: 1080px; table-layout: fixed; border-collapse: collapse; font-size: 8.5pt; box-sizing: border-box;">
+                        <table style="width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 8.5pt; box-sizing: border-box;">
                             ${headerRowHtml}
                             <tbody>
                                 ${chunkRowsHtml}
@@ -1585,14 +1448,14 @@
             if (navbar) navbar.style.display = 'none';
             if (mainContainer) mainContainer.style.display = 'none';
 
-            // إنشاء حاوية التقرير المؤقتة بتنسيق A4 أفقي ممتد لكامل الصفحة
+            // إنشاء حاوية التقرير المؤقتة بتنسيق ممتد لكامل الصفحة بدون هوامش
             const renderWrapper = document.createElement('div');
             renderWrapper.id = 'pdfExportRenderWrapper';
             renderWrapper.style.cssText = `
-                width: 1080px;
+                width: ${pageWidthPx}px;
                 background-color: #ffffff;
                 color: #000000;
-                padding: 2px;
+                padding: 0;
                 margin: 0 auto;
                 box-sizing: border-box;
                 font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
@@ -1602,9 +1465,9 @@
 
             document.body.appendChild(renderWrapper);
 
-            // خيارات html2pdf لاستغلال كامل مساحة الصفحة بهوامش 3 ملم فقط
+            // خيارات html2pdf بدون هوامش نهائياً (margin: 0)
             const opt = {
-                margin: [3, 3, 3, 3],
+                margin: 0,
                 filename: fileName,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: {
@@ -1612,7 +1475,7 @@
                     useCORS: true,
                     scrollX: 0,
                     scrollY: 0,
-                    windowWidth: 1090
+                    windowWidth: pageWidthPx + 10
                 },
                 jsPDF: {
                     unit: 'mm',
